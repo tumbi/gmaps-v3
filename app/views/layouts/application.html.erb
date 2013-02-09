@@ -7,9 +7,11 @@
   <%= csrf_meta_tags %>
 <%= yield :head %> 
 </head>
-<body>
+<body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
+	<div class="container">
 
 <%= yield %>
 <%= yield :scripts %>
+</div>
 </body>
 </html>
