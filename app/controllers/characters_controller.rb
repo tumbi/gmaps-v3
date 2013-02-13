@@ -1,20 +1,27 @@
 class CharactersController < ApplicationController
+
   # GET /characters
   # GET /characters.json
+  before_filter :authenticate_user!, :except => [:show, :index]
   def index
-    @characters = Character.all
-    @json = Character.all.to_gmaps4rails
+    if user_signed_in?
+    @characters = current_user.characters.all
+    @json = current_user.characters.all.to_gmaps4rails
+  
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @characters }
     end
+  else
+    redirect_to new_user_session_path
+  end
   end
 
   # GET /characters/1
   # GET /characters/1.json
   def show
-    @character = Character.find(params[:id])
+    @character = current_user.characters.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +32,7 @@ class CharactersController < ApplicationController
   # GET /characters/new
   # GET /characters/new.json
   def new
-    @character = Character.new
+    @character = current_user.characters.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +42,13 @@ class CharactersController < ApplicationController
 
   # GET /characters/1/edit
   def edit
-    @character = Character.find(params[:id])
+    @character = current_user.characters.find(params[:id])
   end
 
   # POST /characters
   # POST /characters.json
   def create
-    @character = Character.new(params[:character])
+    @character = current_user.characters.new(params[:character])
 
     respond_to do |format|
       if @character.save
@@ -57,7 +64,7 @@ class CharactersController < ApplicationController
   # PUT /characters/1
   # PUT /characters/1.json
   def update
-    @character = Character.find(params[:id])
+    @character = current_user.characters.find(params[:id])
 
     respond_to do |format|
       if @character.update_attributes(params[:character])
@@ -73,7 +80,7 @@ class CharactersController < ApplicationController
   # DELETE /characters/1
   # DELETE /characters/1.json
   def destroy
-    @character = Character.find(params[:id])
+    @character = current_user.characters.find(params[:id])
     @character.destroy
 
     respond_to do |format|

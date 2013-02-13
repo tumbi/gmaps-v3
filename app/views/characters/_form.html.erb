@@ -1,3 +1,4 @@
+<div class = "formcontract">
 <%= simple_form_for @character, :html => { :class => 'form-horizontal well' } do |f| %>
   <fieldset>
     <div class ="control-group">
@@ -20,8 +21,10 @@
   </div>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
+
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 characters_path, :class => 'btn' %>
   </div>
 <% end %>
 </fieldset>
+</div>

@@ -1,8 +1,11 @@
 <%- model_class = Character -%>
-<section id ="typography">
+<!--<section id ="typography">
 <div class="page-header">
   <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
-                                 :default => "New #{model_class.model_name.human}") %></h1>
+                                 :default => "New #{model_class.model_name.human}") %>
+</div> -->
+<div class = "formheading">
+<h1> New Contract </h1>
 </div>
 <%= render :partial => 'form' %>
 </section>

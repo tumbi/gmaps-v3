@@ -30,11 +30,16 @@
   </thead>
   <tbody>
     <% @characters.each do |character| %>
-      <tr>
+    <% if character.lessthan? %>
+      <tr class = "error">
+        <% else %>
+        <tr>
+          <% end %>
         <td><%= link_to character.id, character_path(character) %></td>
         <td><%= character.name %></td>
         <td><%= character.address %></td>
         <td><%= character.fences %></td>
+     
       <!--  <td><%= character.longitude %></td>
         <td><%= character.latitude %></td>
         <td><%= character.fences %></td>
