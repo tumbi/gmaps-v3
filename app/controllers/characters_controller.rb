@@ -5,7 +5,7 @@ class CharactersController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
   def index
     if user_signed_in?
-    @characters = current_user.characters.all
+    @characters = current_user.characters.find(:all, :order => :contractendon)
     @json = current_user.characters.all.to_gmaps4rails
   
 

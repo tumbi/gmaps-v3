@@ -1,13 +1,21 @@
 class Character < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :address, :fences, :gmaps, :latitude, :longitude, :name
+  attr_accessible :address, :fences, :gmaps, :latitude, :longitude, :name, :contractendon
   acts_as_gmappable
 
 def lessthan?
-  if self.fences < 100
+  if self.contractendon < 14.day.since.to_date && self.contractendon > Time.now.to_date
     return true
   end
 end
+
+def expiretoday?
+  if self.contractendon <= Time.now.to_date
+    return true
+  end
+end
+
+
 
   def gmaps4rails_address
  address 

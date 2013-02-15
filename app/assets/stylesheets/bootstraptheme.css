@@ -2276,13 +2276,15 @@ table th[class*="span"],
 }
 
 .table tbody tr.error > td {
-  background-color: #f2dede;
-  /*text-decoration: blink; */
+ /* background-color: #f2dede;*/
+  text-decoration: blink;
+  background-color: #e36b23;
   color: #000000;
 }
 
 .table tbody tr.warning > td {
   background-color: #fcf8e3;
+  color: #000000;
 }
 
 .table tbody tr.info > td {
@@ -2294,7 +2296,8 @@ table th[class*="span"],
 }
 
 .table-hover tbody tr.error:hover > td {
-  background-color: #ebcccc;
+  /*background-color: #ebcccc; */
+  background-color: #ff0000;
 }
 
 .table-hover tbody tr.warning:hover > td {
@@ -3936,7 +3939,8 @@ input[type="submit"].btn.btn-mini {
 .alert-danger,
 .alert-error {
   color: #b94a48;
-  background-color: #f2dede;
+  /*background-color: #f2dede;*/
+  background-color: #ff0000;
   border-color: #eed3d7;
 }
 
@@ -6796,7 +6800,7 @@ label {
 .control-group.error .input-prepend .add-on,
 .control-group.error .input-append .add-on {
   color: #c76e6d;
-  background-color: #f2dede;
+  background-color: /*#f2dede*/ #ff0000
   border-color: #c76e6d;
 }
 

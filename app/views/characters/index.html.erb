@@ -14,10 +14,14 @@
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th> </th>
+     <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:address) %></th>
+      <th>Contract Ends On</th>
       <th><%= model_class.human_attribute_name(:fences) %></th>
+      
+
       <!--
       <th><%= model_class.human_attribute_name(:longitude) %></th>
       <th><%= model_class.human_attribute_name(:latitude) %></th>
@@ -31,13 +35,19 @@
   <tbody>
     <% @characters.each do |character| %>
     <% if character.lessthan? %>
-      <tr class = "error">
-        <% else %>
+      <tr class = "warning">
+        <td> Expiring within 14 days </td>
+        <% elsif character.expiretoday? %>
+        <tr class = "error">
+          <td>Expired</td>
+          <% else %>
         <tr>
+          <td> </td>
           <% end %>
-        <td><%= link_to character.id, character_path(character) %></td>
+        <!--<td><%= link_to character.id, character_path(character) %></td>-->
         <td><%= character.name %></td>
         <td><%= character.address %></td>
+        <td><%= character.contractendon %></td>
         <td><%= character.fences %></td>
      
       <!--  <td><%= character.longitude %></td>
