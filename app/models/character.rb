@@ -1,6 +1,6 @@
 class Character < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :address, :fences, :gmaps, :latitude, :longitude, :name, :contractendon
+  attr_accessible :address, :fences, :gmaps, :latitude, :longitude, :name, :contractendon, :email
   acts_as_gmappable
 
 def lessthan?

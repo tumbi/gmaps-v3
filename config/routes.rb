@@ -4,6 +4,8 @@ Gmaps::Application.routes.draw do
   resources :characters
   root :to => 'characters#index'
 
+  get "characters/:id/emailcontract" => "characters#send_contract", :as => "email_contract"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

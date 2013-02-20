@@ -3,6 +3,18 @@ class CharactersController < ApplicationController
   # GET /characters
   # GET /characters.json
   before_filter :authenticate_user!, :except => [:show, :index]
+  
+def send_contract
+  @character = current_user.characters.find(params[:id])
+CharacterExpiry.contract_email(@character,current_user).deliver
+
+respond_to do |format|
+      format.html { redirect_to characters_url, notice: 'Email was successfully sent'  }
+      format.json { head :no_content }
+end
+end
+
+
   def index
     if user_signed_in?
     @characters = current_user.characters.find(:all, :order => :contractendon)

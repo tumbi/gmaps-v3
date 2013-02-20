@@ -1,8 +1,12 @@
 <header class ="jumbotron subhead" id="overview"><div class = "row">
+
     <fieldset><%- model_class = Character -%>
 <section id="tables">
 <div class="page-header" align="center">
   <h1>SBS Fence Pty Ltd</h1>
+  <p>
+    <%= flash[:notice] %>
+  </p>
   <!--
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 -->
@@ -36,7 +40,10 @@
     <% @characters.each do |character| %>
     <% if character.lessthan? %>
       <tr class = "warning">
-        <td> Expiring within 14 days </td>
+        <td> Expiring within 14 days
+          <%= link_to "Send Email" ,email_contract_path(character), :class => 'btn btn-mini btn-danger' %>
+
+        </td>
         <% elsif character.expiretoday? %>
         <tr class = "error">
           <td>Expired</td>
