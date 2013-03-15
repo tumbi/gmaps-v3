@@ -13,6 +13,7 @@ end
 group :production do
   gem 'pg'
 end
+
 gem 'whenever', :require => false
 gem 'gmaps4rails'
 gem 'devise', '2.0'
