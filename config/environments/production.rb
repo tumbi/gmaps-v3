@@ -57,13 +57,25 @@ Gmaps::Application.configure do
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
+  config.action_mailer.default_url_options = { :host => 'http://aqueous-plateau-9188.herokuapp.com' }
 
-  # Send deprecation notices to registered listeners
-  config.active_support.deprecation = :notify
+  config.action_mailer.delivery_method = :smtp
 
-  CLICKATELL_CONFIG = YAML.load(File.open(File.join(Rails.root, 'config', 'clickatell.yml')))
+  ActionMailer::Base.smtp_settings = {
+    :tls            => true,
+    :address        => 'smtp.gmail.com',
+    :port           => 587,
+    :domain         => 'popupstorz.com',
+    :authentication => :plain,
+    :user_name => "test.account.rac@gmail.com",
+    :password => "racpakistan22"
 
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
-end
+    # Send deprecation notices to registered listeners
+    config.active_support.deprecation = :notify
+
+    CLICKATELL_CONFIG = YAML.load(File.open(File.join(Rails.root, 'config', 'clickatell.yml')))
+
+    # Log the query plan for queries taking more than this (works
+    # with SQLite, MySQL, and PostgreSQL)
+    # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  end
