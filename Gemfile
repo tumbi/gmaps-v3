@@ -6,13 +6,14 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'mysql2'
 end
+
 
 group :production do
   gem 'pg'
 end
-
+gem 'whenever', :require => false
 gem 'gmaps4rails'
 gem 'devise', '2.0'
 gem 'simple_form'
@@ -32,6 +33,9 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+gem 'clickatell'
 
 
 # To use ActiveModel has_secure_password

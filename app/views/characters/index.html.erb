@@ -1,5 +1,7 @@
 <header class ="jumbotron subhead" id="overview"><div class = "row">
 
+  <%= current_user.id %>
+
     <fieldset><%- model_class = Character -%>
 <section id="tables">
 <div class="page-header" align="center">
@@ -12,9 +14,17 @@
 -->
 </div>
 </header>
+<h2> Search Contracts </h2>
+  <%= form_tag characters_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %> 
 <div class ="page-header">
     <h1>Rental Contracts</h1>
-</div>
+  </div>
+
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
@@ -38,19 +48,18 @@
   </thead>
   <tbody>
     <% @characters.each do |character| %>
-    <% if character.lessthan? %>
+  <% if character.lessthan? %>
       <tr class = "warning">
         <td> Expiring within 14 days
-          <%= link_to "Send Email" ,email_contract_path(character), :class => 'btn btn-mini btn-danger' %>
-
         </td>
         <% elsif character.expiretoday? %>
         <tr class = "error">
           <td>Expired</td>
           <% else %>
         <tr>
-          <td> </td>
-          <% end %>
+          <td></td>
+          <% end %> 
+        
         <!--<td><%= link_to character.id, character_path(character) %></td>-->
         <td><%= character.name %></td>
         <td><%= character.address %></td>
@@ -64,14 +73,23 @@
         <td><%=l character.created_at %></td>
         -->
         <td>
-        
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_character_path(character), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <div>
+<div>
+<button class="rerun">Actions</button>
+<button class="select">Select an action</button>
+</div>
+<ul>
+  <li>Actions</li>
+  <li><%= link_to 'Edit', edit_character_path(character) %></li>
+  <li><%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       character_path(character),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %></li>
+                      <li><%= link_to 'Send Email', email_contract_path(character) %></li>
+                      <li><%= link_to 'Send Sms', sms_contract_path(character) %></li>
+</ul>
+</div>
+        
         </td>
       </tr>
     <% end %>

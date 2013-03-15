@@ -2,9 +2,13 @@ Gmaps::Application.routes.draw do
   devise_for :users
 
   resources :characters
+  resources :sms
   root :to => 'characters#index'
 
   get "characters/:id/emailcontract" => "characters#send_contract", :as => "email_contract"
+  get "characters/:id/smscontract" => "characters#send_sms", :as => "sms_contract"
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

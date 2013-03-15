@@ -1,6 +1,9 @@
 <div class = "formcontract">
 <%= simple_form_for @character, :html => { :class => 'form-horizontal well' } do |f| %>
   <fieldset>
+   <div class ="control-group">
+  <%= f.input :contract_number %>
+  </div>
     <div class ="control-group">
   <%= f.input :name %>
 </div>
@@ -10,8 +13,13 @@
   <div class ="control-group">
   <%= f.input :email %>
   </div>
+   <div class ="control-group">
+  <%= f.input :mobile_number %>
+  </div>
+
   <div class ="control-group">
-  <%= f.input :contractendon %>
+    "Contract Ends On" <br \>
+  <%= f.text_field :contractendon, :id => 'dateselect' %>
   </div>
   <div class ="control-group">
   <%= f.input :longitude %>
