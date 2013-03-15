@@ -64,7 +64,7 @@ Gmaps::Application.configure do
 
   CLICKATELL_CONFIG = YAML.load(File.open(File.join(Rails.root, 'config', 'clickatell.yml')))
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'http://aqueous-plateau-9188.herokuapp.com' }
 
   config.action_mailer.delivery_method = :smtp
 
