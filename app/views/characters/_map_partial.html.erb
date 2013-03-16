@@ -1,0 +1,9 @@
+<%= gmaps("map_options" => {"center_latitude" => lat.blank? ? "" : lat,
+    "center_longitude" => long.blank? ? "" : long,
+    "detect_location" => false,
+    "center_on_user" => false,
+    "auto_adjust" => false,
+    "auto_zoom" => true,
+    "zoom" => 8 },
+  :markers => { :data => @json  }
+)%>
