@@ -1,6 +1,6 @@
 production:
   solr:
-    hostname: localhost
+    hostname: http://aqueous-plateau-9188.herokuapp.com
     port: 8983
     log_level: WARNING
     # read_timeout: 2
