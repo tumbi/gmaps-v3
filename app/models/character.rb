@@ -17,8 +17,8 @@ class Character < ActiveRecord::Base
     time    :contractendon, :stored => true
     integer :user_id, :stored => true
   end
-  handle_asynchronously :solr_index
-  handle_asynchronously :remove_from_index
+#  handle_asynchronously :solr_index
+#  handle_asynchronously :remove_from_index
 
   def lessthan?
     if self.contractendon < 14.day.since.to_date && self.contractendon > Time.now.to_date
