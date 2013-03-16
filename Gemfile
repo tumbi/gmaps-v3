@@ -37,6 +37,7 @@ gem 'jquery-rails'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'clickatell'
+gem 'progress_bar'
 
 
 # To use ActiveModel has_secure_password
