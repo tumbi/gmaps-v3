@@ -188,6 +188,5 @@ class CharactersController < ApplicationController
       end
     end
     redirect_to characters_path
-
   end
 end

@@ -8,7 +8,13 @@ class TemplatesController < ApplicationController
     @template = MessageTemplate.new
   end
 
-  def create
+  def create    
+    unless params[:message_template][:body].blank?
+      params[:message_template][:body] = params[:message_template][:body].gsub('<input type="button"',"")
+      params[:message_template][:body] = params[:message_template][:body].gsub('value="address" />','#{@character.address}')
+      params[:message_template][:body] = params[:message_template][:body].gsub('value="name" />','#{@character.name}')
+      params[:message_template][:body] = '"'+params[:message_template][:body].strip+'"'
+    end
     
     @template = MessageTemplate.new(params[:message_template])
     @template.company_id = current_user.company_id
@@ -20,8 +26,7 @@ class TemplatesController < ApplicationController
     @template = MessageTemplate.find(params[:id])
   end
 
-  def update
-    
+  def update    
     @template = MessageTemplate.find(params[:id])
 
     @template.update_attributes(params[:message_template])
@@ -34,4 +39,5 @@ class TemplatesController < ApplicationController
     @template.destroy
     redirect_to templates_path
   end
+
 end

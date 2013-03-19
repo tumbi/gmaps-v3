@@ -5,10 +5,12 @@ class CharacterExpiry < ActionMailer::Base
   # with the following lookup:
   #
   #   en.character_expiry.contract_email.subject
-  #
+  
   def contract_email (character, user)
-    @contract = character
-    @template = MessageTemplate.first
-    mail(:to => character.email, :subject => "SBS Fence Rental Contract Expiring Soon", :from => user.email)
+    @character = character
+    @template = MessageTemplate.last
+    @body = @template.body
+    mail(:to => character.email, :subject => "SBS Fence Rental Contract Expiring Soon", :from => user.email,:body => @body, :content => "text/html")
   end
+
 end
