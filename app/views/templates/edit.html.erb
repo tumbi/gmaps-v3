@@ -4,8 +4,19 @@
   <%= f.text_field :subject %><br/>
 
 
-  Body: <br/>
-  <%= f.text_area :body, :class => "tinymce" %><br/>
+  <%#*Body: <br/>%>
+  <%#= f.text_area :body, :class => "tinymce" %>
+  <div style="float:left;width:100%;">
+    <div style="float:left;">
+      Body: <br/>
+      <%= f.text_area :body, :value =>  @template.body.gsub('"',''),:class => "tinymce", :id => "template_body" %><br/>
+    </div>
+
+    <div style="float:left;margin-top: 20px; margin-left:20px;">
+      <% fields = Character.columns.map {|c| c.name } %>
+      <%= select_tag "field_vals", options_for_select([["name","name"],["address","address"]]),:prompt => "Select Fields",:onchange => "render_template(this.value)" , :class => "input"%>
+    </div>
+  </div>
 
   signature: <br/>
   <%= f.text_area :signature, :class => "tinymce" %><br/>
@@ -14,3 +25,9 @@
   <%=f.submit "update"%>
 
 <%end%>
+<script type="text/javascript">
+  function render_template(val){
+    val = "<input type='button' value="+val+"></input>&nbsp;"
+    tinyMCE.execInstanceCommand('template_body',"mceInsertContent",false,val);
+  }
+</script>
