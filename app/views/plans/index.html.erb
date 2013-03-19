@@ -1,0 +1,15 @@
+<br/><br/>
+<%unless @plans.blank?%>
+  <%@plans.each do |plan|%>
+    Title: <br/>
+    <%=plan.title%> <br/>
+    Description: <br/>
+    <%=plan.description%> <br/>
+    Frequency: <br/>
+    <%=plan.frequency%> <br/>
+    price: <br/>
+    <%=plan.price%> <br/>
+  <%end%>
+<%else%>
+  There are no plans to show
+<%end%>

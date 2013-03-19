@@ -1,14 +1,20 @@
 Gmaps::Application.routes.draw do
-  devise_for :users
+  require 'subdomain'
+  devise_for :users, :controllers => {:registrations => "registrations"}
 
-  resources :characters do
-    collection do
-      get :view_full_map
-      get :export_to_csv
-      post :import_records
+  constraints(Subdomain) do
+    resources :characters do
+      collection do
+        get :view_full_map
+        get :export_to_csv
+        post :import_records
+      end
     end
+    resources :sms
+    resources :companies
+    resources :plans
+    resources :templates
   end
-  resources :sms
   root :to => 'characters#index'
   match "/set_position" => "characters#set_position"
 

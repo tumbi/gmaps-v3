@@ -1,0 +1,12 @@
+<br/><br/>
+<%unless @templates.blank?%>
+  <%@templates.each do |temp|%>
+    Body: <br/>
+    <%=raw(temp.body)%> <br/><%=link_to "Edit", edit_template_path(temp)%><%=link_to "Delete", template_path(temp), :method => :delete, :confirm => "Are you sure!"%><br/>
+  
+  <%end%>
+<%else%>
+  There are no templates to show!
+<%end%>
+
+  <%=link_to "create a template", new_template_path%>

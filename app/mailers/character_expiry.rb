@@ -8,6 +8,7 @@ class CharacterExpiry < ActionMailer::Base
   #
   def contract_email (character, user)
     @contract = character
+    @template = MessageTemplate.first
     mail(:to => character.email, :subject => "SBS Fence Rental Contract Expiring Soon", :from => user.email)
   end
 end

@@ -18,6 +18,7 @@ gem 'whenever', :require => false
 gem 'gmaps4rails'
 gem 'devise', '2.0'
 gem 'simple_form'
+gem 'tinymce-rails'
 
 
 # Gems used only for assets and not required

@@ -1,0 +1,16 @@
+
+<%=form_for @template, :url => template_path do |f|%>
+  Subject: <br/>
+  <%= f.text_field :subject %><br/>
+
+
+  Body: <br/>
+  <%= f.text_area :body, :class => "tinymce" %><br/>
+
+  signature: <br/>
+  <%= f.text_area :signature, :class => "tinymce" %><br/>
+  <%= tinymce %>
+
+  <%=f.submit "update"%>
+
+<%end%>

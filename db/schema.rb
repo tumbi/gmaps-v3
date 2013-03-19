@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306064355) do
+ActiveRecord::Schema.define(:version => 20130318145746) do
 
   create_table "characters", :force => true do |t|
     t.string   "name"
@@ -29,9 +29,38 @@ ActiveRecord::Schema.define(:version => 20130306064355) do
     t.integer  "mobile_number"
   end
 
+  create_table "companies", :force => true do |t|
+    t.string   "company_name"
+    t.string   "subdomain"
+    t.string   "address"
+    t.string   "phone_number"
+    t.string   "fax_number"
+    t.string   "company_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "message_templates", :force => true do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "company_id"
+    t.text     "signature"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "plans", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.float    "price"
+    t.string   "frequency"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -40,8 +69,18 @@ ActiveRecord::Schema.define(:version => 20130306064355) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "name"
+    t.string   "timezone"
+    t.string   "mobile_number"
+    t.string   "country"
+    t.boolean  "is_active",              :default => false
+    t.integer  "company_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
