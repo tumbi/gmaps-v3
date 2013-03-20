@@ -1,0 +1,20 @@
+<br/><br/>
+<% unless @assets.blank? %>
+  <% @assets.each do |temp| %>
+    name: <br/>
+    <%= temp.name %> <br/>
+    description: <br/>
+    <%= raw(temp.description) %> <br/>
+    model: <br/>
+    <%= temp.model %> <br/>
+    quantity: <br/>
+    <%= temp.quantity %> <br/>
+    
+    <%= link_to "Edit", edit_asset_path(temp)%>
+    <%= link_to "Delete", asset_path(temp), :method => :delete, :confirm => "Are you sure!" %><br/>
+  <%end%>
+<%else%>
+  There are no assets to show!
+<%end%>
+
+<%= link_to "create a asset", new_asset_path %>

@@ -1,0 +1,20 @@
+<%=form_for @asset, :url => asset_path do |f|%>
+  name: <br/>
+  <%= f.text_field :name %><br/>
+
+  <div style="float:left;width:100%;">
+    <div style="float:left;">
+      Description: <br/>
+      <%= f.text_area :description %><br/>
+    </div>
+  </div>
+
+  model: <br/>
+  <%= f.text_field :model %><br/>
+
+  quantity: <br/>
+  <%= f.text_field :quantity %><br/>
+
+  <%=f.submit "update"%>
+
+<%end%>

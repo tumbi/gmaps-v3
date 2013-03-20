@@ -19,7 +19,7 @@ gem 'gmaps4rails'
 gem 'devise', '2.0'
 gem 'simple_form'
 gem 'tinymce-rails'
-
+gem "activemerchant"
 
 # Gems used only for assets and not required
 # in production environments by default.

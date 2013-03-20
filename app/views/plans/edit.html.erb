@@ -1,0 +1,23 @@
+<%= form_for @plan, :url => plan_path do |f|%>
+  title: <br/>
+  <%= f.text_field :title %><br/>
+
+  <div style="float:left;width:100%;">
+    <div style="float:left;">
+      description: <br/>
+      <%= f.text_area :description %><br/>
+    </div>
+  </div>
+
+  price: <br/>
+  <%= f.text_field :price %><br/>
+
+  frequency: <br/>
+  <%= f.text_field :frequency %><br/>
+  
+  type: <br/>
+  <%= select_tag "plan[plan_type]", options_for_select([["SMS","sms"],["Package","package"]]),:prompt => "Select Fields", :class => "input"%>
+  
+  <%= f.submit "Create" %>
+
+<%end%>

@@ -9,7 +9,8 @@ class CharacterExpiry < ActionMailer::Base
   def contract_email (character, user)
     @character = character
     @template = MessageTemplate.last
-    @body = @template.body
+    @body = @template.body.gsub("&nbsp;","")
+    @body = eval(@body)
     mail(:to => character.email, :subject => "SBS Fence Rental Contract Expiring Soon", :from => user.email,:body => @body, :content => "text/html")
   end
 

@@ -13,6 +13,7 @@ Gmaps::Application.routes.draw do
     resources :sms
     resources :companies
     resources :plans
+    resources :assets
     resources :templates do
       collection do
         get :update_template
