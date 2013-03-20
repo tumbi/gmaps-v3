@@ -9,14 +9,14 @@ class Character < ActiveRecord::Base
 
   acts_as_gmappable
 
-  searchable do
-    text :address, :name, :email, :stored => true
-    integer :fences, :stored => true
-    integer :contract_number, :stored => true
-    integer :mobile_number, :stored => true
-    time    :contractendon, :stored => true
-    integer :user_id, :stored => true
-  end
+#  searchable do
+#    text :address, :name, :email, :stored => true
+#    integer :fences, :stored => true
+#    integer :contract_number, :stored => true
+#    integer :mobile_number, :stored => true
+#    time    :contractendon, :stored => true
+#    integer :user_id, :stored => true
+#  end
 
   def lessthan?
     if self.contractendon < 14.day.since.to_date && self.contractendon > Time.now.to_date
@@ -39,9 +39,6 @@ class Character < ActiveRecord::Base
       end
     end
   end
-
-
-
 
   def gmaps4rails_address
     address

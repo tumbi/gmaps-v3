@@ -113,17 +113,16 @@ class CharactersController < ApplicationController
   # PUT /characters/1.json
   def update
     @character = current_user.characters.find(params[:id])
-
-    respond_to do |format|
+#    respond_to do |format|
       if @character.update_attributes(params[:character])
-        solr.update(:character)
-        format.html { redirect_to @character, notice: 'Character was successfully updated.' }
-        format.json { head :no_content }
+#        solr.update(:character)
+        redirect_to @character, notice: 'Character was successfully updated.'
+#        format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @character.errors, status: :unprocessable_entity }
+        render action: "edit"
+#        format.json { render json: @character.errors, status: :unprocessable_entity }
       end
-    end
+#    end
   end
 
   # DELETE /characters/1

@@ -15,7 +15,7 @@ class RegistrationsController < Devise::RegistrationsController
       @user.company_id = @company.id
     end
     @user.save
-    super
+#    super
   end
   
  
