@@ -84,11 +84,12 @@
           <!-- Everything you want hidden at 940px or less, place within here -->
           <div class="nav-collapse collapse">
             <!-- .nav, .navbar-search, .navbar-form, etc -->
+            <ul class="nav pull-right">
             <% if user_signed_in? %>
               Signed in as <%= current_user.email %>.
               Not you?
               <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-              <ul class="nav pull-right">
+              
                 <li>
                   <%=link_to "Contracts", characters_path%>
                 </li>
