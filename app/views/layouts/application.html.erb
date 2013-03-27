@@ -31,7 +31,6 @@
               <div class="controls">
                 <input id="login-email" class="reqed " name="user[email]" type="text" value="" placeholder="Email" />
               </div>
-  <%#= f.input :email, :required => false, :autofocus => true, :class => "reqed" %>
             </div>
             <div class="control-group">
               <label class="control-label" for="login-password">Password</label>
@@ -41,7 +40,6 @@
                   <a href="#">Forgot your password?</a>
                 </span>
               </div>
-
             </div><div class="control-group">
               <div class="controls">
                 <label class="checkbox">
@@ -51,12 +49,10 @@
               </div>
             </div>
           </div>
-
           <div class="clearfix"></div>
-  <%#*</form>%>
         </div>
-        <div class="modal-footer">
 
+        <div class="modal-footer">
           <div class="signinbuttonandtext"> Not a KCART member yet?
             <a href="http://www.advisoray.com/main/apply">
               Apply to Join
@@ -66,6 +62,19 @@
         </div>
       </div>
     <% end %>
+
+
+    <%# *Sign Up Form %>
+    <div id="signupModal" class="popup modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 >Sign Up</h3>
+      </div>
+      <div class="modal-body" style="background-color:#FFFFFF;color:#333333">        
+        <%= render :partial => "/devise/registrations/new" %>
+      </div>
+    </div>
+
 
     <div class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
