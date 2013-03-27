@@ -2,8 +2,10 @@
 <html>
   <head>
     <title>Gmaps</title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+
     <%= javascript_include_tag "application" %>
+
     <%= stylesheet_link_tag "http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" %>
     <%= javascript_include_tag "http://code.jquery.com/jquery-1.9.1.js" %>
     <%= javascript_include_tag "http://code.jquery.com/ui/1.10.1/jquery-ui.js" %>
@@ -85,11 +87,11 @@
           <div class="nav-collapse collapse">
             <!-- .nav, .navbar-search, .navbar-form, etc -->
             <ul class="nav pull-right">
-            <% if user_signed_in? %>
-              Signed in as <%= current_user.email %>.
-              Not you?
-              <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-              
+              <% if user_signed_in? %>
+                Signed in as <%= current_user.email %>.
+                Not you?
+                <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+
                 <li>
                   <%=link_to "Contracts", characters_path%>
                 </li>
@@ -148,5 +150,176 @@
     <div style="float: left;width: 95%;margin-left: 3%;">
       <%= yield %>
     </div>
+
+
+    <div class="clearfix"></div>
+    <div class="footer">
+      <div class="container">
+        <div class="row-fluid">
+          <div class="span3">
+            <h4>
+              Overview
+            </h4>
+            <ul>
+              <li>
+                <a href="#">lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#">lorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lispm dollar</a>
+              </li>
+              <li>
+                <a href="#">dollarlorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#">lorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lispm dollar</a>
+              </li>
+              <li>
+                <a href="#">dollarlorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#">lorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lispm dollar</a>
+              </li>
+              <li>
+                <a href="#">dollarlorium ispm </a>
+              </li>
+            </ul>
+          </div>
+          <div class="span3">
+            <h4>
+              Overview
+            </h4>
+            <ul>
+              <li>
+                <a href="#">lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#">lorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lispm dollar</a>
+              </li>
+              <li>
+                <a href="#">dollarlorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#">lorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lispm dollar</a>
+              </li>
+              <li>
+                <a href="#">dollarlorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#">lorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lispm dollar</a>
+              </li>
+              <li>
+                <a href="#">dollarlorium ispm </a>
+              </li>
+            </ul>
+          </div>
+          <div class="span3">
+            <h4>
+              Overview
+            </h4>
+            <ul>
+              <li>
+                <a href="#">lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#">lorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lispm dollar</a>
+              </li>
+              <li>
+                <a href="#">dollarlorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#">lorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lispm dollar</a>
+              </li>
+              <li>
+                <a href="#">dollarlorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#">lorium ispm </a>
+              </li>
+              <li>
+                <a href="#">lispm dollar</a>
+              </li>
+              <li>
+                <a href="#">dollarlorium ispm </a>
+              </li>
+            </ul>
+          </div>
+          <div class="span3">
+            <h4>
+              Overview
+            </h4>
+            <p>
+              ks fksjgsd gnkdfjkdfjnk djnkjnkd ndl nsjhjh
+            </p>
+            <h4>
+              Overview
+            </h4>
+            <ul>
+              <li>
+                <a href="#"><i class="icon-facebook-sign"></i> lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#" ><i class="icon-twitter-sign"></i> lorium ispm </a>
+              </li>
+              <li>
+                <a href="#"><i class="icon-linkedin-sign"></i> lispm dollar</a>
+              </li>
+              <li>
+                <a href="#"><i class="icon-google-plus-sign"></i> dollarlorium ispm </a>
+              </li>
+              <li>
+                <a href="#"><i class="icon-github-sign"></i> lorium ispm dollar</a>
+              </li>
+              <li>
+                <a href="#"><i class="icon-pinterest-sign"></i> lorium ispm </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </body>
 </html>

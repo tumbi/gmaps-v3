@@ -29,7 +29,7 @@ html body
 
 .mainbanner
 {
-	background:url(/assets/bg-img.png) scroll repeat-x center top;
+	background:url(../images/bg-img.png) scroll repeat-x center top;
 	min-height:480px;
 	margin-top:-86px;
 	padding-top:182px;
