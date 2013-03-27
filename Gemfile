@@ -12,7 +12,7 @@ end
 
 group :production do
   gem 'pg'
-  gem 'sqlite3'
+#  gem 'sqlite3'
 end
 gem 'will_paginate', '~> 3.0'
 gem 'whenever', :require => false
