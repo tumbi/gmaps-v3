@@ -6,19 +6,22 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     @user = User.new(params[:user])
-    if @user.save
-      if params[:user][:company_id]
-        @user.company_id = params[:user][:company_id]
-      else
-        @company = Company.new(:company_name => params[:company_name], :subdomain => params[:subdomain])
-        @company.save
-        @user.company_id = @company.id
+    if !params[:user][:company_id].blank?
+      @user.company_id = params[:user][:company_id]
+      if @user.save
+        role = add_role(params[:account_type].to_s)
+        @user.roles << role
       end
-      flash[:notice] = "User is created successfully!"
     else
-      flash[:notice] = "User can't be created!Plese try again or later."
+      @company = Company.new(:company_name => params[:company_name], :subdomain => params[:subdomain])
+      @company.save
+      @user.company_id = @company.id
+      if @user.save
+        role = add_role("company")
+        @user.roles << role
+      end
     end
     redirect_to "/"
-    #    super
   end
+  
 end

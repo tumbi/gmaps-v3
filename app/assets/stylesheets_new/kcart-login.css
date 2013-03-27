@@ -1,0 +1,130 @@
+@charset "utf-8";
+
+html body
+{
+ background-color:: #000000 !important;
+	font-family:Arial, Helvetica, sans-serif;
+	padding-top:86px !important;
+}
+
+.navbar.navbar-fixed-top .navbar-inner
+{
+	background: #000;
+	box-shadow: 0pt 2px 5px rgba(0, 0, 0, 0.3);
+	height: 86px;
+	border:0 none transparent;
+}
+
+.navbar.navbar-fixed-top .brand
+{
+	padding:30px 0;
+}
+
+.navbar.navbar-fixed-top .nav > li > a
+{
+	font-size: 14px;
+	line-height: normal;
+	padding: 40px 10px 10px;
+}
+
+.mainbanner
+{
+	background:url(../images/bg-img.png) scroll repeat-x center top;
+	min-height:480px;
+	margin-top:-86px;
+	padding-top:182px;
+}
+
+.slogancap{
+	display:block;
+	background-color:#fff;
+	height:5px;
+	width:180px;
+	margin:0 auto 20px;
+}
+
+.slogan
+{
+	color:#fff;
+	font-size:42px;
+	line-height:58px;
+	text-transform:uppercase;
+	text-align:center;
+	padding:0 5%;
+}
+
+.slogan small { font-size:12px; }
+
+.btn.btn-banner
+{
+	font-size:18px;
+	color:#fff;
+	text-shadow:0 0 0 transparent !important;
+	background-color:#49b0e6;
+	background-image:none;
+	font-weight:normal;
+	font-family:Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	line-height:50px;
+	border-radius:50px;
+	padding:0 30px;
+	border:0 none transparent !important;
+}
+
+.btn.btn-banner.transp
+{
+	background-color:transparent !important;
+	background-image:none !important;
+	box-shadow:0 0 0 transparent !important;
+}
+
+.whitecontainer{
+	background:#ffffff;
+	color:#767676;
+}
+
+.partition {
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+	line-height: 50px;
+	height: 20px;
+	margin:30px 0;
+}
+
+.partition .heading {
+color: rgb(54, 54, 54);
+background: #fff;
+width: 20%;
+margin: 0 auto;
+font-size: 18px;
+font-weight: normal;
+text-transform: uppercase;
+}
+
+.features{text-align:center;border-bottom:1px solid #ddd;}
+
+h2{color:#545454;font-weight:normal !important;font-size:26px;}
+
+p{font-size:16px;}
+
+.footer{
+	padding:30px 0;
+}
+
+.footer ul{list-style:none;padding:0;margin:0;}
+
+.footer h4{font-size:14px;color:#fff;}
+
+.footer a{text-decoration:none;font-size:13px;color:#909090;}
+
+.features{padding:30px 0;}
+
+.popup{
+	width:60%;
+	position:absolute;
+	left:50%;
+	margin-left:-30%;
+	background:#fff;
+	border:1px solid #ddd;
+	box-shadow:0 5px 10px #000;
+}

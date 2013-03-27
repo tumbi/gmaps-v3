@@ -1,7 +1,9 @@
 Gmaps::Application.routes.draw do
   require 'subdomain'
   devise_for :users, :controllers => {:registrations => "registrations"}
-
+  devise_scope :user do
+    get "sign_out", :to => "devise/sessions#destroy"
+  end
   constraints(Subdomain) do
     resources :characters do
       collection do
@@ -20,7 +22,39 @@ Gmaps::Application.routes.draw do
       end
     end
   end
-  root :to => 'characters#index'
+
+  namespace :admin do
+#    constraints(Subdomain) do
+      resources :users do
+        collection do
+          get :new_company
+          post :create_company
+          get :new_company_user
+          post :create_company_user
+        end
+      end
+
+      resources :characters do
+        collection do
+          get :view_full_map
+          get :export_to_csv
+          post :import_records
+        end
+      end
+      resources :sms
+      resources :companies
+      resources :plans
+      resources :assets
+      resources :templates do
+        collection do
+          get :update_template
+        end
+      end
+#    end
+  end
+
+  root :to => 'welcome#index'
+#  root :to => 'characters#index'
   match "/set_position" => "characters#set_position"
 
   get "characters/:id/emailcontract" => "characters#send_contract", :as => "email_contract"

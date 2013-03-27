@@ -1,6 +1,9 @@
 class PlansController < ApplicationController
   def index
     @plans = Plan.all
+    if @plans.blank?
+      redirect_to "/"
+    end
   end
 
   def new

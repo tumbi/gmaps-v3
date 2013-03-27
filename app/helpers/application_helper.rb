@@ -1,5 +1,7 @@
 module ApplicationHelper
-
+  def role?(role)
+    return current_user.roles.include?(role)
+  end
 
   def countries
     return [

@@ -4,15 +4,15 @@
   <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
     <%= f.error_notification %>
     <fieldset>
-
       <div class="inputs">
         <%= f.input :email, :required => true, :autofocus => true %>
         <%= f.input :name %>
+
         <%company = Company.find_by_subdomain(request.subdomain)%>
         <%unless company.blank?%>
-          <%=hidden_field_tag "user[company_id]", company.id%>
+          <%= hidden_field_tag "user[company_id]", company.id %>
           <label>Comapny Name</label>
-          <%= text_field_tag :company_name, :value => company.company_name, :readonly => true %>
+          <%= text_field_tag :company_name, company.company_name, :readonly => true %>
         <%else%>
           <label>Comapny Name</label>
           <%= text_field_tag :company_name%>
@@ -27,6 +27,13 @@
         <%= f.time_zone_select :timezone %>
         <%= f.input :password, :required => true %>
         <%= f.input :password_confirmation, :required => true %>
+
+        <%unless company.blank?%>
+          <label>Account Type</label>
+          <%= select_tag "account_type", options_for_select([["contractor","contractor"],["staff","staff"],["customer","customer"]]),:prompt => "Select Account Type" %>
+          <% else %>
+          <%= hidden_field_tag "account_type", "company" %>
+        <% end %>
       </div>
 
       <div class="actions">

@@ -18,7 +18,7 @@
   </div>
 
   <div class ="control-group">
-    "Contract Ends On" <br \>
+    "Contract Ends On" <br />
   <%= f.text_field :contractendon, :id => 'dateselect' %>
   </div>
   <div class ="control-group">
@@ -29,6 +29,10 @@
   </div>
   <div class ="control-group">
   <%= f.input :fences %>
+  </div>
+
+  <div class ="control-group">
+    <%= select_tag( "assets", options_from_collection_for_select( @assets, :name, :name), :prompt => "Select Assets",  :multiple => true ) %>
   </div>
   <div class ="control-group">
   <%= f.input :gmaps %>

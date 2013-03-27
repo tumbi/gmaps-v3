@@ -1,0 +1,30 @@
+<div class="leftcontent">
+  <div class="shadowCont" style="float: left;">
+    <div class="s_head">Create Company Account</div>
+    <%= simple_form_for [:admin,@user],:url => "/admin/users/create_company", :multipart => true do |f| %>
+      <%#= f.error_notification %>
+      <fieldset>
+        <div class="inputs">
+          <%= f.input :email, :required => true, :autofocus => true %>
+          <%= f.input :name %>
+          <label>Comapny Name</label>
+          <%= text_field_tag :company_name%>
+          <label>Comapny Subdomain</label>
+          <%= text_field_tag :subdomain %>
+
+          <%= f.input :mobile_number %>
+
+
+          <%= f.input :country, :as => :select, type: :select, :collection => countries %>
+          <label>Comapny Subdomain</label>
+          <%= f.time_zone_select :timezone %>
+          <%= f.input :password, :required => true %>
+          <%= f.input :password_confirmation, :required => true %>
+          <%= hidden_field_tag "account_type", "company" %>
+        </div>
+
+        <%= f.submit "Create", :class => "search" %>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

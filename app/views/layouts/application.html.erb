@@ -13,31 +13,139 @@
     <script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.5/src/markerclusterer_packed.js"></script>
     <script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/src/richmarker-compiled.js"></script>
     <%= yield :head %>
-
   </head>
-  
-
   <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
 
-    <div class="container">
-      <div id="user_nav">
-        <% if user_signed_in? %>
-          Signed in as <%= current_user.email %>. Not you?
-          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-          <%=link_to "Contracts", characters_path%>
-          <% company = Company.find_by_id(current_user.company_id)%>
-          <%= link_to "company", company_path(company) %>
-          <%= link_to "Plans", plans_path %>
-          <%= link_to "Message Templates", templates_path %>
-          <%= link_to "Assets", assets_path %>
-        <% else %>
-          <%= link_to "Sign up", new_user_registration_path %> or
-          <%= link_to "Sign in", new_user_session_path %>
-        <% end %>
+    <div id="myModal" class="popup modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 >login</h3>
       </div>
+      <div class="modal-body" style="background-color:#FFFFFF;color:#333333">
+        <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal"}) do |f| %>
+          <div class="greycontainer">
+            <div class="control-group">
+              <label class="control-label" for="login-email">E-mail Address</label>
+              <div class="controls">
+                <input id="login-email" class="reqed " name="user[email]" type="text" value="" placeholder="Email" />
+              </div>
+  <%#= f.input :email, :required => false, :autofocus => true, :class => "reqed" %>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="login-password">Password</label>
+              <div class="controls">
+                <input id="login-password"  name="user[password]" type="password" value="" placeholder="Password" />&nbsp;
+                <span class="text-error" id="for_pass">
+                  <a href="#">Forgot your password?</a>
+                </span>
+              </div>
 
+            </div><div class="control-group">
+              <div class="controls">
+                <label class="checkbox">
+                  <input type="checkbox" name="remember[]" value="remember" id="remember" />
+                  Remember me
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+  <%#*</form>%>
+        </div>
+        <div class="modal-footer">
+
+          <div class="signinbuttonandtext"> Not a KCART member yet?
+            <a href="http://www.advisoray.com/main/apply">
+              Apply to Join
+            </a>
+            <%= f.button :submit, "Sign in", :class => "btn btn-primary pull-right" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+
+          <!-- Be sure to leave the brand out there if you want it shown -->
+          <a class="brand" href="/">
+            <img src="/assets/logo.png" />
+          </a>
+
+          <!-- Everything you want hidden at 940px or less, place within here -->
+          <div class="nav-collapse collapse">
+            <!-- .nav, .navbar-search, .navbar-form, etc -->
+            <% if user_signed_in? %>
+              Signed in as <%= current_user.email %>.
+              Not you?
+              <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+              <ul class="nav pull-right">
+                <li>
+                  <%=link_to "Contracts", characters_path%>
+                </li>
+                <li>
+                  <% company = Company.find_by_id(current_user.company_id)%>
+                  <%= link_to "Company", company_path(company) %>
+                </li>
+                <li>
+                  <% if role?("admin") %>
+                    <%= link_to "Plans", plans_path %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to "Message Templates", templates_path %>
+                </li>
+                <li>
+                  <%= link_to "Assets", assets_path %>
+                </li>
+
+              <% else %>
+                <li>
+                  <a href="#">
+                    FEATURES
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    PRICING
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    GET KCART
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    DO MORE
+                  </a>
+                </li>
+                <li>
+                  <a href="#myModal" data-toggle="modal">
+                    LOGIN
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <%= flash[:notice] %>
+    <%= flash[:error] %>
+    <div style="float: left;width: 95%;margin-left: 3%;">
       <%= yield %>
-      <%= yield :scripts %>
     </div>
   </body>
 </html>

@@ -73,6 +73,7 @@ class CharactersController < ApplicationController
   # GET /characters/new.json
   def new
     @character = current_user.characters.new
+    @assets = Asset.where(:company_id => current_user.company_id)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @character }
@@ -81,18 +82,24 @@ class CharactersController < ApplicationController
 
   # GET /characters/1/edit
   def edit
+    @assets = Asset.where(:company_id => current_user.company_id)
     @character = current_user.characters.find(params[:id])
   end
 
   # POST /characters
   # POST /characters.json
   def create
-   
+    p "aaaaaaaaaaaaaaaaaaaaaa",params.inspect
+    fff
     @character = current_user.characters.new(params[:character])
-
+    @assets = Asset.where(:company_id => current_user.company_id)
     respond_to do |format|
       format.html do
         if @character.save!
+          params[:assets].each do|a|
+            asset = Asset.find_by_name(a)
+            @character.assets << asset
+          end
           redirect_to @character, notice: 'Character was successfully created.'
         else
           render action: "new"
@@ -113,6 +120,7 @@ class CharactersController < ApplicationController
   # PUT /characters/1.json
   def update
     @character = current_user.characters.find(params[:id])
+    @assets = Asset.where(:company_id => current_user.company_id)
 #    respond_to do |format|
       if @character.update_attributes(params[:character])
 #        solr.update(:character)
