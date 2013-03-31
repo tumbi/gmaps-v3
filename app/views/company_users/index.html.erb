@@ -1,0 +1,9 @@
+<%unless @company_users.blank?%>
+  <% @company_users.each do |user| %>
+    <%= user.email %><br/>
+  <%end%>
+<%else%>
+  There are no users
+<%end%>
+
+<%= link_to "add new company user", new_company_user_path %>

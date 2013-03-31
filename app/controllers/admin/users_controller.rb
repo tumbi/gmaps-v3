@@ -22,7 +22,7 @@ class Admin::UsersController < ApplicationController
     if @user.save
       role = add_role("company")
       @user.roles << role
-#      UserMailer.send_user_information(@user).deliver
+      CharacterExpiry.send_user_information(@user).deliver
       redirect_to admin_users_path
     else
       render :new_company
@@ -32,11 +32,11 @@ class Admin::UsersController < ApplicationController
   def create_company_user
     @user = User.new(params[:user])
     @user.skip_confirmation!    
-#    @user.company_id = @company.id
+    #    @user.company_id = @company.id
     if @user.save
       role = add_role(params[:account_type].to_s)
       @user.roles << role
-#      UserMailer.send_user_information(@user).deliver
+      #      UserMailer.send_user_information(@user).deliver
       redirect_to admin_users_path
     else
       render :new_company_user

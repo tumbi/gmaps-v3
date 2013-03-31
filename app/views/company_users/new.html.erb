@@ -1,0 +1,32 @@
+<%#*:url => "/admin/users/create_company",%>
+<div class="leftcontent">
+  <div class="shadowCont" style="float: left;">
+    <div class="s_head">Create Company Account</div>
+    <%= simple_form_for @user, :url => company_users_path, :multipart => true do |f| %>
+  <%#= f.error_notification %>
+      <fieldset>
+        <div class="inputs">
+          <%= f.input :email, :required => true, :autofocus => true %>
+          <%= f.input :name %>
+
+          
+          <label>Comapny Name</label>
+          <%= f.hidden_field :company_id, :value => current_user.company.id %>
+
+          <%= f.input :mobile_number %>
+
+          <%= f.input :country, :as => :select, type: :select, :collection => countries %>
+          <label>Comapny Subdomain</label>
+          <%= f.time_zone_select :timezone %>
+          <%= f.input :password , :required => true %>
+          <%= f.input :password_confirmation ,:required => true %>
+
+          <label>Account Type</label>
+          <%= select_tag "account_type", options_for_select([["contractor","contractor"],["staff","staff"],["customer","customer"]]),:prompt => "Select Account Type" %>
+        </div>
+
+        <%= f.submit "Create", :class => "search" %>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
