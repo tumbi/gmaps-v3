@@ -7,7 +7,7 @@ class CharactersController < ApplicationController
   
   def send_contract
     @character = current_user.characters.find(params[:id])
-    CharacterExpiry.contract_email(@character,current_user).deliver
+    CharacterExpiry.contract_email(@character,current_user,current_user.company.message_templates.last).deliver
 
     respond_to do |format|
       format.html { redirect_to characters_url, notice: 'Email was successfully sent'  }
