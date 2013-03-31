@@ -1,0 +1,48 @@
+<div class = "formcontract">
+<%= simple_form_for @character, :html => { :class => 'form-horizontal well' } do |f| %>
+  <fieldset>
+   <div class ="control-group">
+  <%= f.input :contract_number %>
+  </div>
+    <div class ="control-group">
+  <%= f.input :name %>
+</div>
+<div class ="control-group">
+  <%= f.input :address %>
+  </div>
+  <div class ="control-group">
+  <%= f.input :email %>
+  </div>
+   <div class ="control-group">
+  <%= f.input :mobile_number %>
+  </div>
+
+  <div class ="control-group">
+    "Contract Ends On" <br />
+  <%= f.text_field :contractendon, :id => 'dateselect' %>
+  </div>
+  <div class ="control-group">
+  <%= f.input :longitude %>
+  </div>
+  <div class ="control-group">
+  <%= f.input :latitude %>
+  </div>
+  <div class ="control-group">
+  <%= f.input :fences %>
+  </div>
+
+  <div class ="control-group">
+    <%= select_tag( "assets", options_from_collection_for_select( @assets, :name, :name), :prompt => "Select Assets",  :multiple => true ) %>
+  </div>
+  <div class ="control-group">
+  <%= f.input :gmaps %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                characters_path, :class => 'btn' %>
+  </div>
+<% end %>
+</fieldset>
+</div>
