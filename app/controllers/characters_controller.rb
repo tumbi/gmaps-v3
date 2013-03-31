@@ -89,8 +89,7 @@ class CharactersController < ApplicationController
   # POST /characters
   # POST /characters.json
   def create
-    p "aaaaaaaaaaaaaaaaaaaaaa",params.inspect
-    fff
+   
     @character = current_user.characters.new(params[:character])
     @assets = Asset.where(:company_id => current_user.company_id)
     respond_to do |format|

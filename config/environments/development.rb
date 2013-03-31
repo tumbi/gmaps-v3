@@ -37,16 +37,18 @@ Gmaps::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.default :charset => "utf-8"
 
   ActionMailer::Base.smtp_settings = {
-    :tls            => true,
-    :address        => 'smtp.gmail.com',
+    :address        => "smtp.gmail.com",
     :port           => 587,
     :domain         => 'popupstorz.com',
-    :authentication => :plain,
     :user_name => "test.account.rac@gmail.com",
-    :password => "racpakistan22"
+    :password => "racpakistan22",
+    :authentication => 'plain',
+    :enable_starttls_auto => true
   }
-  
 
 end
