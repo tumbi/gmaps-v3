@@ -9,17 +9,34 @@ class Character < ActiveRecord::Base
 
   acts_as_gmappable
 
-#  searchable do
-#    text :address, :name, :email, :stored => true
-#    integer :fences, :stored => true
-#    integer :contract_number, :stored => true
-#    integer :mobile_number, :stored => true
-#    time    :contractendon, :stored => true
-#    integer :user_id, :stored => true
-#  end
-
+  #  searchable do
+  #    text :address, :name, :email, :stored => true
+  #    integer :fences, :stored => true
+  #    integer :contract_number, :stored => true
+  #    integer :mobile_number, :stored => true
+  #    time    :contractendon, :stored => true
+  #    integer :user_id, :stored => true
+  #  end
   def lessthan?
     if self.contractendon < 14.day.since.to_date && self.contractendon > Time.now.to_date
+      return true
+    end
+  end
+
+  def two_week_reminder?
+    if self.contractendon < 14.day.since.to_date && self.contractendon > Time.now.to_date
+      return true
+    end
+  end
+
+  def weekly_reminder?
+    if self.contractendon < 7.day.since.to_date && self.contractendon > Time.now.to_date
+      return true
+    end
+  end
+
+  def monthly_reminder?
+    if self.contractendon < 30.day.since.to_date && self.contractendon > Time.now.to_date
       return true
     end
   end
@@ -31,11 +48,31 @@ class Character < ActiveRecord::Base
   end
 
   def self.send_reminder_email
-    Character.first.update_attribute('name',"aaaa")
-    @characters = Character.all
-    @characters.each do |cont|
-      @contractors.each do |cont|
-        CharacterExpiry.contract_email(cont,cont.user).deliver
+    Company.all.each do |com|
+      com.characters.each do |cont|
+        setting = cont.user.notification_setting
+        unless setting.blank?
+          if setting.oneday_reminder
+            if cont.expiretoday?
+              CharacterExpiry.contract_email(cont,cont.user).deliver
+            end
+          end
+          if setting.weekly_reminder
+            if cont.weekly_reminder?
+              CharacterExpiry.contract_email(cont,cont.user).deliver
+            end
+          end
+          if setting.monthly_reminder
+            if cont.monthly_reminder?
+              CharacterExpiry.contract_email(cont,cont.user).deliver
+            end
+          end
+          if setting.bimonthly_reminder
+            if cont.two_week_reminder?
+              CharacterExpiry.contract_email(cont,cont.user).deliver
+            end
+          end
+        end
       end
     end
   end

@@ -1,5 +1,12 @@
 <div class = "formheading">
   <h1> New Notification Settings </h1>
 </div>
-<%= render :partial => 'form' %>
+<%= form_for @notification_setting do |f| %>
+  <%= f.check_box :monthly_reminder %> want to send reminder 1 month before? <br/>
+  <%= f.check_box :bimonthly_reminder %> want to send reminder 2 weeks before? <br/>
+  <%= f.check_box :weekly_reminder %> want to send reminder 1 week before? <br/>
+  <%= f.check_box :oneday_reminder %> want to send reminder if contract is expiring today? <br/>
 
+
+  <%= f.submit "create" %>
+<%end%>
