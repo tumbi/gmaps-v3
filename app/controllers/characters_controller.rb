@@ -95,11 +95,13 @@ class CharactersController < ApplicationController
     respond_to do |format|
       format.html do
         if @character.save!
-          params[:assets].each do|a|
-            asset = Asset.find_by_name(a)
-            @character.assets << asset
+          unless params[:assets].blank?
+            params[:assets].each do|a|
+              asset = Asset.find_by_name(a)
+              @character.assets << asset
+            end
           end
-          redirect_to @character, notice: 'Character was successfully created.'
+          redirect_to characters_path, notice: 'Character was successfully created.'
         else
           render action: "new"
         end
