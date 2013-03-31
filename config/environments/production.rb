@@ -15,7 +15,7 @@ Gmaps::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-#  config.assets.compile = false
+  #  config.assets.compile = false
   config.assets.compile = true
 
   # Generate digests for assets URLs
@@ -68,18 +68,20 @@ Gmaps::Application.configure do
   config.action_mailer.default_url_options = { :host => 'http://aqueous-plateau-9188.herokuapp.com' }
 
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.default :charset => "utf-8"
 
   ActionMailer::Base.smtp_settings = {
-    :tls            => true,
-    :address        => 'smtp.gmail.com',
+    :address        => "smtp.gmail.com",
     :port           => 587,
     :domain         => 'popupstorz.com',
-    :authentication => :plain,
     :user_name => "test.account.rac@gmail.com",
-    :password => "racpakistan22"
-    
-    }
-    # Log the query plan for queries taking more than this (works
-    # with SQLite, MySQL, and PostgreSQL)
-    # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  end
+    :password => "racpakistan22",
+    :authentication => 'plain',
+    :enable_starttls_auto => true
+  }
+  # Log the query plan for queries taking more than this (works
+  # with SQLite, MySQL, and PostgreSQL)
+  # config.active_record.auto_explain_threshold_in_seconds = 0.5
+end
