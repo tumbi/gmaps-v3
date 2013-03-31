@@ -121,16 +121,16 @@ class CharactersController < ApplicationController
   def update
     @character = current_user.characters.find(params[:id])
     @assets = Asset.where(:company_id => current_user.company_id)
-#    respond_to do |format|
-      if @character.update_attributes(params[:character])
-#        solr.update(:character)
-        redirect_to @character, notice: 'Character was successfully updated.'
-#        format.json { head :no_content }
-      else
-        render action: "edit"
-#        format.json { render json: @character.errors, status: :unprocessable_entity }
-      end
-#    end
+    #    respond_to do |format|
+    if @character.update_attributes(params[:character])
+      #        solr.update(:character)
+      redirect_to @character, notice: 'Character was successfully updated.'
+      #        format.json { head :no_content }
+    else
+      render action: "edit"
+      #        format.json { render json: @character.errors, status: :unprocessable_entity }
+    end
+    #    end
   end
 
   # DELETE /characters/1
@@ -195,5 +195,10 @@ class CharactersController < ApplicationController
       end
     end
     redirect_to characters_path
+  end
+
+  def reminder_email
+    Character.send_reminder_email
+    redirect_to :back
   end
 end

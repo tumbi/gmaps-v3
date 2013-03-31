@@ -48,29 +48,31 @@ class Character < ActiveRecord::Base
   end
 
   def self.send_reminder_email
-    Company.all.each do |com|
-      com.characters.each do |cont|
-        setting = cont.user.notification_setting
-        unless setting.blank?
-          if setting.oneday_reminder
-            if cont.expiretoday?
-              CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
-            end
+    Character.all.each do |cont|
+      setting = cont.user.notification_setting
+      unless setting.blank?
+        if setting.oneday_reminder
+          if cont.expiretoday?
+            
+            CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
           end
-          if setting.weekly_reminder
-            if cont.weekly_reminder?
-              CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
-            end
+        end
+        if setting.weekly_reminder
+          if cont.weekly_reminder?
+            
+            CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
           end
-          if setting.monthly_reminder
-            if cont.monthly_reminder?
-              CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
-            end
+        end
+        if setting.monthly_reminder
+          if cont.monthly_reminder?
+            
+            CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
           end
-          if setting.bimonthly_reminder
-            if cont.two_week_reminder?
-              CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
-            end
+        end
+        if setting.bimonthly_reminder
+          if cont.two_week_reminder?
+            
+            CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
           end
         end
       end

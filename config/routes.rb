@@ -10,6 +10,7 @@ Gmaps::Application.routes.draw do
         get :view_full_map
         get :export_to_csv        
         post :import_records
+        get :reminder_email
       end
     end
     resources :sms
