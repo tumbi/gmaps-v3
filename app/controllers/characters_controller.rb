@@ -48,9 +48,11 @@ class CharactersController < ApplicationController
         
         @characters = @characters.paginate(:page => params[:page], :per_page => 2)
       end
+      #      @json = @characters.to_gmaps4rails
       @json = current_user.characters.all.to_gmaps4rails
+      
       respond_to do |format|
-        format.html # index.html.erb
+        format.html
         format.json { render json: @characters }
       end
     else
@@ -153,13 +155,16 @@ class CharactersController < ApplicationController
 
   def set_position
     @character = Character.find(params[:id])
-    @json = current_user.characters.all.to_gmaps4rails
-    #    respond_to do |format|
-    #      format.js do
-    #        foo =  render_to_string(:partial => "map_partial", :locals => {:json => @json, :lat => @character.latitude, :long => @character.longitude}).to_json
-    #        render :js => "$('#map_div').html(#{foo})"
-    #      end
-    #    end
+    @json = @character.to_gmaps4rails
+#    p "aaaaaaaaaaaaaaaaa",@json.inspect
+#    ggg
+#    @json = current_user.characters.all.to_gmaps4rails
+#    respond_to do |format|
+#      format.js do
+#        foo =  render_to_string(:partial => "map_partial", :locals => {:json => @json, :lat => @character.latitude, :long => @character.longitude}).to_json
+#        render :js => "$('#map_div').html(#{foo})"
+#      end
+#    end
   end
 
   def export_to_csv

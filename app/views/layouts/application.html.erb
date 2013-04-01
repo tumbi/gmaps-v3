@@ -12,6 +12,8 @@
     <%= stylesheet_link_tag "bootstrap-responsive" %>
     <%= stylesheet_link_tag "bootstrap.min" %>
     <%= stylesheet_link_tag "bootstrap-responsive.min" %>
+    <%= stylesheet_link_tag 'gmaps4rails' %>
+
 
     <%= stylesheet_link_tag "http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" %>
     <%= javascript_include_tag "http://code.jquery.com/jquery-1.9.1.js" %>
@@ -195,6 +197,7 @@
         <p class="notice" style="padding: 5px;width :95%;background-color:#00cccc;"><%= flash[:myinfo] %></p>
       <% end %>
       <%= yield %>
+      <%= yield :scripts %>
     </div>
 
 

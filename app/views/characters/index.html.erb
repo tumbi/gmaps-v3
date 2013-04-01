@@ -112,10 +112,18 @@
         <h2>MAP</h2>
       </div>
     </section>
-    <%lat=""%>
-    <%=long=""%>
-    <div id = "map_div">
-      <%= gmaps("map_options" => {"center_latitude" => lat.blank? ? 37 : lat,
+    
+    <div id="map_div">
+      <%#= gmaps("map_options" => {"center_latitude" => 37,
+          "center_longitude" => 37,
+          "detect_location" => false,
+          "center_on_user" => false,
+          "auto_adjust" => false,
+          "auto_zoom" => true,
+          "zoom" => 8 },
+        :markers => { :data => @json  }
+      )%>
+      <%#= gmaps("map_options" => {"center_latitude" => lat.blank? ? 37 : lat,
           "center_longitude" => long.blank? ? 37 : long,
           "detect_location" => false,
           "center_on_user" => false,
@@ -124,7 +132,7 @@
           "zoom" => 8 },
         :markers => { :data => @json  }
       )%>
-<%#= render :partial => "map_partial", :locals => {:json => @json, :lat => "", :long => ""} %>
+    <%= render :partial => "map_partial", :locals => {:json => @json, :lat => "37", :long => "37"} %>
     </div>
     <%=link_to "View full screen", view_full_map_characters_path, :target => "_blank"%>
 
