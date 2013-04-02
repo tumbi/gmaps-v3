@@ -1,4 +1,11 @@
+#require 'geocoder/models/active_record'
 class Character < ActiveRecord::Base
+
+  extend ::Geocoder::Model::ActiveRecord
+
+  geocoded_by :address_for_geocode
+  reverse_geocoded_by :latitude, :longitude
+
   belongs_to :user
   attr_accessible :address, :fences, :gmaps, :latitude, :longitude, :name, :contractendon, :email, :contract_number, :mobile_number, :user_id
   validates :email, :presence => true
@@ -8,7 +15,9 @@ class Character < ActiveRecord::Base
   validates :contract_number, :presence => true, :uniqueness => true
 
   acts_as_gmappable
-
+  
+  has_many :markers
+  accepts_nested_attributes_for :markers, :allow_destroy => true
   #  searchable do
   #    text :address, :name, :email, :stored => true
   #    integer :fences, :stored => true
@@ -90,20 +99,59 @@ class Character < ActiveRecord::Base
   end
   
   def gmaps4rails_marker_picture
-    if self.lessthan?
-      {
-        "picture" => "/images/FenceIcon.png",
-        "width" => "25",
-        "height" => "39"
-      }
+    unless self.markers.blank?
+      marker = ""
+      if monthly_reminder?
+        marker = self.markers.where("duration = 30")
+        set_marker(marker)
+      elsif two_week_reminder?
+        marker = self.markers.where("duration = 15")
+        set_marker(marker)
+      elsif weekly_reminder?
+        marker = self.markers.where("duration = 7")
+        set_marker(marker)
+      elsif expiretoday?
+        marker = self.markers.where("duration = 0")
+        set_marker(marker)
+      else
+        set_marker(marker)
+      end
+
     else
+      set_marker(marker)
+    end
+
+    #    if self.lessthan?
+    #      {
+    #        "picture" => "/images/FenceIcon.png",
+    #        "width" => "25",
+    #        "height" => "39"
+    #      }
+    #    else
+    #      {
+    #        "picture" => "/images/fencered.png",
+    #        "width" => "25",
+    #        "height" => "39"
+    #      }
+    #    end
+  end
+
+  def set_marker(marker)    
+    if marker.blank?
       {
-  
         "picture" => "/images/fencered.png",
         "width" => "25",
         "height" => "39"
       }
+    else
+      marker = marker.first
+      {
+        "picture" => "#{marker.photo.url(:original)}",
+        "width" => "25",
+        "height" => "39"
+      }
     end
+    
   end
   
 end

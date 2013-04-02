@@ -1,0 +1,3 @@
+<%= form_for([@character, @marker], :html => { :multipart => true, :class => "new_marker_form"}) do |f|%>
+  <%= render :partial => "form", :locals => {:f => f} %>
+<% end %>

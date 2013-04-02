@@ -150,29 +150,29 @@ class CharactersController < ApplicationController
 
   def view_full_map
     @json = current_user.characters.all.to_gmaps4rails
-    
   end
 
   def set_position
     @character = Character.find(params[:id])
     @json = @character.to_gmaps4rails
-#    p "aaaaaaaaaaaaaaaaa",@json.inspect
-#    ggg
-#    @json = current_user.characters.all.to_gmaps4rails
-#    respond_to do |format|
-#      format.js do
-#        foo =  render_to_string(:partial => "map_partial", :locals => {:json => @json, :lat => @character.latitude, :long => @character.longitude}).to_json
-#        render :js => "$('#map_div').html(#{foo})"
-#      end
-#    end
   end
 
   def export_to_csv
     @characters = current_user.characters
     csv_string = CSV.generate do |csv|
-      csv << ["contract number", "name", "address", "contract ends on", "fences", "latitude", "longitude", "gmaps"]
+      csv << ["contract number", "name", "address", "contract ends on", "location", "gmaps","email","mobile number"]
       @characters.each_with_index do |chr|
-        csv << [chr.contract_number,chr.name, chr.address, chr.contractendon, chr.fences, chr.latitude,chr.longitude, chr.gmaps]
+        addr = ""
+        if !chr.latitude.blank? and !chr.longitude.blank?
+          addr = chr.latitude.to_s+","+chr.longitude.to_s
+        end
+        unless addr.blank?
+          location = Geocoder.search(addr) if !addr.blank?
+          unless location.blank?
+            addr = location[0].address
+          end
+        end
+        csv << [chr.contract_number,chr.name, chr.address, chr.contractendon, addr, chr.gmaps,chr.email,chr.mobile_number]
       end
     end
     send_data csv_string, :filename => "output.csv" , :type=>"text/csv"
@@ -183,19 +183,33 @@ class CharactersController < ApplicationController
     CSV.parse(data_file).each_with_index do |row,i|
       if i > 0
         @check_character = Character.find_by_contract_number(row[0])
+        #        Get the latitude and longitude from the location
+        lat = ""
+        long = ""
+        unless row[4].blank?
+          a = Geocoder.search(row[4])
+          unless a.blank?
+            lat = a[0].latitude
+            long = a[0].longitude
+          end
+        end
+
         if @check_character.blank?
           @new_character = Character.new(:contract_number => row[0],:name => row[1],
-            :address => row[2],:contractendon => row[3],:fences => row[4],
-            :latitude => row[5],:longitude => row[6], :gmaps => row[7])
+            :address => row[2], :contractendon => row[3],
+            :latitude => lat,:longitude => long, :gmaps => row[5], :email => row[6],
+            :mobile_number => row[7], :user_id => current_user.id)
           @new_character.save
         else
           @check_character.name = row[1]
           @check_character.address = row[2]
           @check_character.contractendon = row[3]
-          @check_character.fences = row[4]
-          @check_character.latitude = row[5]
-          @check_character.longitude = row[6]
-          @check_character.gmaps = row[7]
+          @check_character.latitude = lat
+          @check_character.longitude = long
+          @check_character.gmaps = row[5]
+          @check_character.email = row[6]
+          @check_character.mobile_number = row[7]
+          @check_character.user_id = current_user.id
           @check_character.save
         end
       end

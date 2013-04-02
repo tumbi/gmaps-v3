@@ -12,6 +12,7 @@ Gmaps::Application.routes.draw do
         post :import_records
         get :reminder_email
       end
+      resources :markers
     end
     resources :sms
     resources :companies

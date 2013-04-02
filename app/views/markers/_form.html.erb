@@ -1,0 +1,51 @@
+<div style="padding: 20px;">
+  <div id="lisit-name"><h1><%= @character.name %></h1></div>
+
+  <div id="show-thumbnail">
+    <% unless @marker.new_record? %>
+      <div id="thumbnail">
+        <%= image_tag(@marker.marker.url )%>
+      </div>
+    <%end%>
+  </div>
+  <div>    
+    <br/>
+    <br/>
+    <% if @marker.new_record? %>
+      <%= f.fields_for :markers do |marker| %>
+        <%= "General Marker" %>
+        <%= marker.file_field :photo_0 %><br />
+        <%#= file_field_tag "photo_0" %>
+        <%= "Daily Expiry Marker" %>
+        <%= marker.file_field :photo_1 %><br />
+        <%= "Weekly Expiry Marker" %>
+        <%= marker.file_field :photo_2 %><br />
+        <%= "Bi-Month Expiry Marker" %>
+        <%= marker.file_field :photo_3 %><br />
+        <%= "Monthly Expiry Marker" %>
+        <%= marker.file_field :photo_4 %><br />
+        <%= hidden_field_tag "character_id","#{@character_id}" %><br />
+      <% end %>
+    <%else%>
+      <br/>
+      <br/>
+      <%@marker.each do |marker|%>
+        <%= image_tag(marker.photo.url(:large) )%>
+        <br/>
+        <br/>
+        <%= link_to t(:delete_photo), character_marker_path(@character,marker), :method => :delete, :confirm => "Are you sure to delete" %>
+      <%end%>
+    <%end%>
+    <br/>
+    <br/>
+
+<%# if @avatar.new_record? %>
+    <center>
+      <button type="submit" class = "search" >
+        <%= "Update Markers" %>
+      </button>
+    </center>
+<%#end%>
+  </div>
+
+</div>

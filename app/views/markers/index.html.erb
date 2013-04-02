@@ -1,0 +1,14 @@
+<div class="container">
+  Markers
+
+  <% @markers.each do |m| %>
+    <%= image_tag(m.marker.url(:original) )%>
+    <br/>
+    <br/>
+    <%= link_to  "Delete" , character_marker_path(@character,m), :method => :delete, :confirm => "Are you sure to delete" %>
+    <br/>
+    <br/>
+  <% end %>
+  <br /><br />
+  <%= link_to "New Markers", new_character_marker_path(@character.id) %>
+</div>
