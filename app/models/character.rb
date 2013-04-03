@@ -61,8 +61,7 @@ class Character < ActiveRecord::Base
       setting = cont.user.notification_setting
       unless setting.blank?
         if setting.oneday_reminder
-          if cont.expiretoday?
-            
+          if cont.expiretoday?            
             CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
           end
         end
@@ -73,14 +72,12 @@ class Character < ActiveRecord::Base
           end
         end
         if setting.monthly_reminder
-          if cont.monthly_reminder?
-            
+          if cont.monthly_reminder?            
             CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
           end
         end
         if setting.bimonthly_reminder
-          if cont.two_week_reminder?
-            
+          if cont.two_week_reminder?            
             CharacterExpiry.contract_email(cont,cont.user,cont.user.company.message_templates.last).deliver
           end
         end
@@ -102,38 +99,23 @@ class Character < ActiveRecord::Base
     unless self.markers.blank?
       marker = ""
       if monthly_reminder?
-        marker = self.markers.where("duration = 30")
+        marker = self.markers.where("duration = '30'")
         set_marker(marker)
       elsif two_week_reminder?
-        marker = self.markers.where("duration = 15")
+        marker = self.markers.where("duration = '15'")
         set_marker(marker)
       elsif weekly_reminder?
-        marker = self.markers.where("duration = 7")
+        marker = self.markers.where("duration = '7'")
         set_marker(marker)
       elsif expiretoday?
-        marker = self.markers.where("duration = 0")
+        marker = self.markers.where("duration = '0'")
         set_marker(marker)
       else
         set_marker(marker)
       end
-
     else
       set_marker(marker)
     end
-
-    #    if self.lessthan?
-    #      {
-    #        "picture" => "/images/FenceIcon.png",
-    #        "width" => "25",
-    #        "height" => "39"
-    #      }
-    #    else
-    #      {
-    #        "picture" => "/images/fencered.png",
-    #        "width" => "25",
-    #        "height" => "39"
-    #      }
-    #    end
   end
 
   def set_marker(marker)    

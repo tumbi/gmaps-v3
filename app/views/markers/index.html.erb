@@ -2,7 +2,7 @@
   Markers
 
   <% @markers.each do |m| %>
-    <%= image_tag(m.marker.url(:original) )%>
+    <%= image_tag(m.url(:original) )%>
     <br/>
     <br/>
     <%= link_to  "Delete" , character_marker_path(@character,m), :method => :delete, :confirm => "Are you sure to delete" %>
