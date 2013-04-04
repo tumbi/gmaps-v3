@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130318145746) do
+ActiveRecord::Schema.define(:version => 20130402114417) do
+
+  create_table "abilities", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "assets", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "model"
+    t.integer  "quantity"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "assets_characters", :force => true do |t|
+    t.integer "asset_id"
+    t.integer "character_id"
+  end
 
   create_table "characters", :force => true do |t|
     t.string   "name"
@@ -40,6 +60,17 @@ ActiveRecord::Schema.define(:version => 20130318145746) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "markers", :force => true do |t|
+    t.integer  "character_id"
+    t.string   "duration"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "message_templates", :force => true do |t|
     t.string   "subject"
     t.text     "body"
@@ -49,6 +80,16 @@ ActiveRecord::Schema.define(:version => 20130318145746) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "notification_settings", :force => true do |t|
+    t.boolean  "monthly_reminder"
+    t.boolean  "bimonthly_reminder"
+    t.boolean  "weekly_reminder"
+    t.boolean  "oneday_reminder"
+    t.integer  "user_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "plans", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -56,6 +97,23 @@ ActiveRecord::Schema.define(:version => 20130318145746) do
     t.string   "frequency"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "plan_type"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  create_table "user_plans", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
