@@ -128,7 +128,7 @@ class Character < ActiveRecord::Base
     else
       marker = marker.first
       {
-        "picture" => "#{marker.photo.url(:original)}",
+        "picture" => "/markers/photos/#{marker.id}/#{marker.photo_file_name}",
         "width" => "25",
         "height" => "39"
       }
