@@ -1,14 +1,18 @@
+<style>
+  label{
+    color:#000000;
+}
+</style>
 <div class="leftcontent">
   <div class="shadowCont" style="float: left;">
     <div class="s_head">Create Company Account</div>
     <%= simple_form_for [:admin,@user],:url => "/admin/users/create_company", :multipart => true do |f| %>
-  <%#= f.error_notification %>
       <fieldset>
         <div class="inputs">
           <%= f.input :email, :required => true, :autofocus => true %>
           <%= f.input :name %>
 
-          <%companies = Company.all %>
+          <% companies = Company.all %>
           <label>Comapny Name</label>
           <%= f.select :company_id, options_from_collection_for_select( companies, :id, :company_name), {:prompt => "Select Company"}, {:style => "width: 207px;"} %>
 

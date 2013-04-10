@@ -16,7 +16,7 @@ class RegistrationsController < Devise::RegistrationsController
       @company = Company.new(:company_name => params[:company_name], :subdomain => params[:subdomain])
       @company.save
       @user.company_id = @company.id
-      if @user.save
+      if @user.save!
         role = add_role("company")
         @user.roles << role
       end
