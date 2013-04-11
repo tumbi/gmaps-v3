@@ -1,5 +1,5 @@
 class TemplatesController < ApplicationController
-
+  before_filter :authenticate_user!
   def index
     @templates = MessageTemplate.where(:company_id => current_user.company_id)
   end

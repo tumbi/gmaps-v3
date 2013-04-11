@@ -27,14 +27,34 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    unless is_admin?
-      company = Company.find(current_user.company_id)
-      root_path(:subdomain => company.subdomain)
-#      p "aaaaaaaaaaaaaaaaaaa",current_user.company.company_name+".#{request.host_with_port}"+"#{plans_path}"
-#      "lvh.me:3001"
+    company = Company.find(current_user.company_id)
+    unless company.blank?
+      unless is_admin?
+        plans = current_user.plans
+        #        plans = current_user.plans.where("is_active = true")
+        day_diff = (Date.today - current_user.confirmed_at.to_date).to_i
+
+        if plans.blank?
+          if day_diff > 30
+            flash[:notice] = "Free trial period is over please select a plan."
+            choose_plan_plans_path(:user => current_user.id, :subdomain => "")
+          else
+            root_path(:subdomain => company.subdomain)
+            #            redirect_to choose_plan_plans_path(:user => @user.id, :subdomain => "")
+          end
+        else
+          #          Will check the selected plans here
+          root_path(:subdomain => company.subdomain)
+        end
+        #      plans_path
+        #      aaaa
+        #      "lvh.me:3001"
+        #        admin_users_path
+      else
+        root_path(:subdomain => company.subdomain)
+      end
     else
-      admin_users_path
+      new_company_path
     end
   end
-
 end

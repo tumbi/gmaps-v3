@@ -252,4 +252,13 @@ module ApplicationHelper
       "Zimbabwe"
     ]
   end
+
+  def nl2br(s)
+    unless s.blank?
+      s.gsub(/\n/, '<br>')
+    else
+      s
+    end
+  end
+
 end

@@ -1,23 +1,29 @@
-<%= form_for @plan, :url => plan_path do |f|%>
-  title: <br/>
-  <%= f.text_field :title %><br/>
+<div class="main-div">
+  <%= form_for @plan, :url => plan_path do |f|%>
+    <div class="left-div">
+      Title: <br/>
+      <%= f.text_field :title %><br/>
 
-  <div style="float:left;width:100%;">
-    <div style="float:left;">
-      description: <br/>
-      <%= f.text_area :description %><br/>
+      <div class="left-container">
+        <div style="float:left;">
+          Description: <br/>
+          <%= f.text_area :description, :class => "tinymce" %><br/>
+          <%= tinymce %>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="right-div">
+      Price: <br/>
+      <%= f.text_field :price %><br/>
 
-  price: <br/>
-  <%= f.text_field :price %><br/>
+      Frequency: <br/>
+      <%= f.text_field :frequency %><br/>
 
-  frequency: <br/>
-  <%= f.text_field :frequency %><br/>
-  
-  type: <br/>
-  <%= select_tag "plan[plan_type]", options_for_select([["SMS","sms"],["Package","package"]]),:prompt => "Select Fields", :class => "input"%>
-  
-  <%= f.submit "Create" %>
+      Type: <br/>
+      <%= select_tag "plan[plan_type]", options_for_select([["SMS","sms"],["Package","package"]],@plan.plan_type),:prompt => "Select Fields", :class => "input", :style => "width:220px;" %>
+      <br />
+      <%= f.submit "Update", :style => "width:100px;" %>
+    </div>
 
-<%end%>
+  <%end%>
+</div>

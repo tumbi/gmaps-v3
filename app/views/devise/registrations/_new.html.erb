@@ -11,21 +11,21 @@
         <%company = Company.find_by_subdomain(request.subdomain)%>
         <%unless company.blank?%>
           <%= hidden_field_tag "user[company_id]", company.id %>
-          <label>Comapny Name</label>
+          <label>Company Name</label>
           <%= text_field_tag :company_name, company.company_name, :readonly => true %>
-        <%else%>
-          <label>Comapny Name</label>
-          <%= text_field_tag :company_name%>
-          <label>Comapny Subdomain</label>
-          <%= text_field_tag :subdomain %>
+        <%#else%>
+          <%#*<label>Company Name</label>%>
+          <%#= text_field_tag :company_name%>
+          <%#*<label>Company Sub-domain</label>%>
+          <%#= text_field_tag :subdomain %>
         <%end%>
         <%= f.input :mobile_number %>
       </div>
       <div style="width: 49%; float: left">
 
-        <%= f.input :country, :as => :select, type: :select, :collection => countries %>
-        <label>Comapny Subdomain</label>
-        <%= f.time_zone_select :timezone %>
+        <%#= f.input :country, :as => :select, type: :select, :collection => countries %>
+        <%#*<label>Company TimeZone</label>%>
+        <%#= f.time_zone_select :timezone %>
         <%= f.input :password, :required => true %>
         <%= f.input :password_confirmation, :required => true %>
 

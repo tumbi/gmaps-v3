@@ -4,15 +4,17 @@
     Title: <br/>
     <%=plan.title%> <br/>
     Description: <br/>
-    <%=plan.description%> <br/>
+    <%= raw plan.description %> <br/>
     Frequency: <br/>
     <%=plan.frequency%> <br/>
     price: <br/>
     <%=plan.price%> <br/>
+    <%= link_to "Edit", edit_plan_path(plan) %>&nbsp;&nbsp;|
+    <%= link_to  "Delete" , plan_path(plan), :method => :delete, :confirm => "Are you sure to delete" %>
   <%end%>
 <%else%>
   There are no plans to show
 <%end%>
 
-
-<%= link_to "Create a Plan", new_plan_path %>
+<br />
+<%= link_to "Create a Plan", new_plan_path, :class => "input" %>

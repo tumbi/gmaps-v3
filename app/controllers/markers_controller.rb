@@ -58,13 +58,13 @@ class MarkersController < ApplicationController
   end
 
   def destroy
-    #    @avatar = Avatar.find_by_id(params[:id])
-    #    if @avatar.destroy
-    #      return redirect_to new_item_avatar_path(@item)
-    #    else
-    #      flash[:notice] = t(:problem_deletin_picture)
-    #      return render :action =>"new"
-    #    end
+    @marker = Marker.find_by_id(params[:id])
+    if @marker.destroy
+      flash[:notice] = "Marker is deleted successfully!"      
+    else
+      flash[:notice] = "Can't delete marker, Please try again or later!"
+    end
+    return redirect_to character_markers_path(params[:character_id])
   end
 
   protected
