@@ -27,9 +27,9 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    company = Company.find(current_user.company_id)
-    unless company.blank?
-      unless is_admin?
+    unless is_admin?
+      company = Company.find(current_user.company_id) if !current_user.company_id .blank?
+      unless company.blank?
         plans = current_user.plans
         #        plans = current_user.plans.where("is_active = true")
         day_diff = (Date.today - current_user.confirmed_at.to_date).to_i
@@ -46,15 +46,11 @@ class ApplicationController < ActionController::Base
           #          Will check the selected plans here
           root_path(:subdomain => company.subdomain)
         end
-        #      plans_path
-        #      aaaa
-        #      "lvh.me:3001"
-        #        admin_users_path
       else
-        root_path(:subdomain => company.subdomain)
+        new_company_path
       end
     else
-      new_company_path
+      admin_users_path#      
     end
   end
 end
