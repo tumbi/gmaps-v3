@@ -1,0 +1,23 @@
+<div class = "formsignin">
+  <h2>Company Details</h2>
+  <%= simple_form_for(@user, :url => "/users/update?u=#{@user.id}") do |f|%>
+    <%= f.error_notification %>
+    <div style="width: 100%;">
+      <div style="width: 49%; float: left">
+
+        <label>Company Name</label>
+        <%= text_field_tag :company_name %>
+        <label>Company Sub-domain</label>
+        <%= text_field_tag :subdomain %>
+
+        <%= f.input :country, :as => :select, type: :select, :collection => countries %>
+        <label>Company TimeZone</label>
+        <%= f.time_zone_select :timezone %>
+
+        <div class="actions">
+          <%= f.button :submit, "Add Details" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

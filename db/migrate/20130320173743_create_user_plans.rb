@@ -1,6 +1,6 @@
 class CreateUserPlans < ActiveRecord::Migration
   def change
-    create_table :user_plans do |t|
+    create_table :plan_users do |t|
 
       t.timestamps
     end

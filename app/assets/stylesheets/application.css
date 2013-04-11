@@ -12,3 +12,8 @@
  *= require_tree .
  */
 .ui-menu { width: 150px; }
+
+.main-div{
+    width:100%;
+    float:left;
+}

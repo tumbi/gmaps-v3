@@ -1,10 +1,19 @@
 Gmaps::Application.routes.draw do
   require 'subdomain'
+
   devise_for :users, :controllers => {:registrations => "registrations"}
   devise_for :users do
     get "sign_out", :to => "devise/sessions#destroy"
+    match "/users/update" => "users#update_user"
   end
-  constraints(Subdomain) do
+
+  resources :plans do
+    collection do
+      get :choose_plan
+    end
+  end
+  
+#  constraints(Subdomain) do
     resources :characters do
       collection do
         get :view_full_map
@@ -15,8 +24,7 @@ Gmaps::Application.routes.draw do
       resources :markers
     end
     resources :sms
-    resources :companies
-    resources :plans
+    resources :companies    
     resources :assets
     resources :notification_settings
     resources :company_users
@@ -25,7 +33,7 @@ Gmaps::Application.routes.draw do
         get :update_template
       end
     end
-  end
+#  end
 
   namespace :admin do
     #    constraints(Subdomain) do

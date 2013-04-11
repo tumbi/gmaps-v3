@@ -9,7 +9,6 @@ class CompanyUsersController < ApplicationController
   end
 
   def create
-
     @user = User.new(params[:user])
     @user.skip_confirmation!
     
