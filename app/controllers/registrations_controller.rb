@@ -22,7 +22,7 @@ class RegistrationsController < Devise::RegistrationsController
         @user.roles << role
       end
       redirect_to choose_plan_plans_path(:user => @user.id, :subdomain => "")
-    end    
+    end
   end
   
 end
