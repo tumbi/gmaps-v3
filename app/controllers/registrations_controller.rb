@@ -17,11 +17,14 @@ class RegistrationsController < Devise::RegistrationsController
       #      @company = Company.new(:company_name => params[:company_name], :subdomain => params[:subdomain])
       #      @company.save
       #      @user.company_id = @company.id
-      if @user.save!
+      if @user.save
         role = add_role("company")
         @user.roles << role
+        redirect_to choose_plan_plans_path(:user => @user.id, :subdomain => "")
+      else
+        render :new
       end
-      redirect_to choose_plan_plans_path(:user => @user.id, :subdomain => "")
+      
     end
   end
   
